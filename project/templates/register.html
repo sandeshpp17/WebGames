@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGames - User Registration</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press Start 2P:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            font-family: 'Press Start 2P', sans-serif;
+            background-image: url('/static/webgamelogin.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #fff; /* Set font color to white */
+        }
+
+        .container {
+            width: 25vw;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6); /* Set container color to dark with some transparency */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Add shadow with white color */
+        }
+
+        h2 {
+            color: #fff; /* Set header color to white */
+            text-align: center;
+            font-family: 'Press Start 2P', sans-serif;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            font-family: 'Press Start 2P', sans-serif;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: 12px;
+            margin: 10px;
+            font-family: 'Press Start 2P', sans-serif; /* Apply font to label */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 30px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+            color: #333; /* Set input text color to dark */
+            background-color: #fff; /* Set input background color to white */
+            font-family: 'Press Start 2P', sans-serif; /* Apply font to input */
+        }
+
+        .show-password {
+            position: absolute;
+            top: 65%;
+            right: 15px;
+            transform: translateY(-50%);
+            color: black;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            display: block;
+            margin: 20px auto; 
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+            font-family: 'Press Start 2P', sans-serif; /* Apply font to button */
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign In</h2>
+        <form id="userForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <i class="fas fa-eye-slash show-password" id="togglePassword"></i>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <i class="fas fa-eye-slash show-password" id="toggleConfirmPassword"></i>
+            </div>
+            <button type="submit" id="submitButton" class="submit-btn hidden">Create Account</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const submitButton = document.getElementById('submitButton');
+        const message = document.getElementById('message');
+
+        username.addEventListener('input', validateForm);
+        email.addEventListener('input', validateForm);
+        password.addEventListener('input', validateForm);
+        confirmPassword.addEventListener('input', validateForm);
+
+        function validateForm() {
+            if (username.value && email.value && password.value && confirmPassword.value && password.value === confirmPassword.value) {
+                submitButton.classList.remove('hidden');
+            } else {
+                submitButton.classList.add('hidden');
+            }
+        }
+
+        const togglePassword = document.getElementById('togglePassword');
+        togglePassword.addEventListener('click', function () {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+
+        const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+        toggleConfirmPassword.addEventListener('click', function () {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            this.classList.toggle('fa-eye-slash');
+            this.classList.toggle('fa-eye');
+        });
+
+        document.getElementById('userForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Here you can perform form submission and redirection
+            message.textContent = 'User created successfully!';
+            setTimeout(() => {
+                window.location.href = '/'; // Redirect to login page after 2 seconds
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

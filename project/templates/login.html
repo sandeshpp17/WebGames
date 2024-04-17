@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebGames - Login</title>
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Exo+2&display=swap">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #333;
+      color: #fff;
+      /* Default text color */
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: 'Press Start 2P', sans-serif;
+      /* Heading fonts */
+    }
+
+    p,
+    span,
+    a {
+      font-family: 'Press Start 2P', sans-serif;
+      /* Body text */
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #333;
+      overflow: hidden;
+      position: fixed;
+      /* Change position to fixed */
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      /* Add a z-index to ensure it's above other content */
+    }
+
+    .navbar img {
+      position: relative;
+      height: 50px;
+      /* Adjust height as needed */
+      margin-top: 5px;
+      border-radius: 15px;
+      left: 5px;
+      /* Adjust margin-top to align with text */
+    }
+
+    .navbar span {
+      position: relative;
+      color: white;
+      text-align: center;
+      bottom: 20px;
+      left: 10px;
+    }
+
+    .navbar-right {
+      float: right;
+      margin-right: 20px;
+      margin-top: 10px;
+    }
+
+    .navbar-right button {
+      background-color: #f14c36;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 25px;
+    }
+
+    .navbar-right button:hover {
+      background-color: #d6824e;
+      /* Darker green on hover */
+      color: #fff;
+      /* Change text color on hover */
+    }
+
+    body.login-form-open {
+      overflow: hidden;
+    }
+
+    /* CSS for Dark Theme Form Popup */
+    .form-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1a1a1a93;
+      /* Dark background color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      color: #fff;
+      /* White text color */
+    }
+
+    .form-container {
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="password"] {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #666;
+      /* Darker border color */
+      border-radius: 5px;
+      background-color: #333;
+      /* Darker input background color */
+      color: #fff;
+      /* White text color */
+    }
+
+    .form-container input[type="checkbox"] {
+      margin-top: 10px;
+      color: #fff;
+      /* White text color */
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #f14c36;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      /* Font family */
+    }
+
+    .form-container button:hover {
+      background-color: #d6824e;
+    }
+
+    .form-container a {
+      display: block;
+      text-align: right;
+      text-decoration: none;
+      color: #ccc;
+      /* Lighter text color */
+      margin-top: 10px;
+      font-size: 14px;
+      /* Adjust font size */
+    }
+
+    .form-container a:hover {
+      text-decoration: underline;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .main {
+      position: absolute;
+      padding: 20px;
+      padding-top: 60px;
+      background-color: #492e2e;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container1 {
+      display: flex;
+      background: url("/static/background.jpg") no-repeat;
+      height: 100vh;
+      width: 100%;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      margin-top: 60px;
+      /* Add top margin to push it below the navbar */
+    }
+
+    .container1-content {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      /* Text color */
+    }
+
+    .container1-content h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .container1-content p {
+      margin-top: 10vh;
+      font-size: 16px;
+      line-height: 1.5;
+      width: 30vw;
+    }
+
+    .cta-buttons {
+      margin-top: 20px;
+    }
+
+    .cta-buttons button {
+      background-color: #f14c36;
+      /* Green button color */
+      color: #fff;
+      /* White text color */
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+    }
+
+    .cta-buttons button:hover {
+      background-color: #d6824e;
+      /* Darker green on hover */
+    }
+
+    .container2 {
+      position: relative;
+      padding: 20px;
+      background-color: #1a1a1a;
+      /* Dark background color */
+      color: #fff;
+      /* White text color */
+      overflow: hidden;
+      height: 85vh;
+      /* Increase the height as needed */
+    }
+
+    .container2 h2 {
+      margin-bottom: 20px;
+      /* Add margin bottom */
+      padding: 10px;
+      /* Add padding */
+    }
+
+    .container2 img {
+      float: left;
+      width: 50px;
+      /* Adjust the width of the logo */
+      height: auto;
+      /* Maintain aspect ratio */
+      margin-right: 20px;
+      border-radius: 15px;
+      margin-bottom: 20px;
+      /* Add space between the logo and the heading */
+    }
+
+    .featured-games {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      /* Add spacing between h2 and featured games */
+      ;
+    }
+
+    .featured-game {
+      width: calc(25% - 10px);
+      /* Adjust width to include margin */
+      background-color: #333;
+      /* Darker background color for game cards */
+      margin-bottom: 20px;
+      /* Add some space between game cards */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+    }
+
+    .featured-game img {
+      width: 100%;
+      height: 350px;
+      /* Set a fixed height for the images */
+      object-fit: cover;
+      /* Maintain aspect ratio and prevent stretching */
+      border-radius: 5px;
+    }
+
+
+    .featured-game h3,
+    .featured-game p {
+      padding: 10px;
+      color: #fff;
+    }
+
+    .container3 {
+      background: url("/static/webgameimage.webp") no-repeat right;
+      background-size: contain;
+      width: 100%;
+      height: 500px;
+      position: relative;
+      padding: 0;
+      background-color: #333;
+      /* Dark background color */
+      color: #ffffff;
+      /* White text color */
+      overflow: auto;
+    }
+
+    .container3 img {
+      float: left;
+      margin-right: 20px;
+      border-radius: 15px;
+      width: 50px;
+      /* Adjust the width of the logo */
+      height: auto;
+      /* Maintain aspect ratio */
+      margin-bottom: 20px;
+      /* Add space between the logo and the heading */
+    }
+
+    .container3-content {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      /* Text color */
+    }
+
+    .container3-content h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .container3-content p {
+      margin-top: 10vh;
+      font-size: 16px;
+      line-height: 1.5;
+      width: 30vw;
+    }
+
+    .account-features {
+      text-align: center;
+    }
+
+    .feedback-button {
+      background-color: #f14c36;
+      /* Green button color */
+      color: #fff;
+      /* White text color */
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+
+    .feedback-button:hover {
+      background-color: #d6824e;
+      /* Darker green on hover */
+    }
+  </style>
+</head>
+</style>
+</head>
+
+<body>
+  <div class="navbar">
+    <img src="/static/logo.jpg" alt="WebGames Logo" />
+    <span>WebGames</span>
+    <div class="navbar-right">
+        <button onclick="openLoginForm()">Login</button>
+        <!-- Add link to registration page -->
+        <button onclick="location.href='/register'">Register Now</button>
+    </div>
+</div>
+<div class="form-popup" id="loginForm">
+  <div class="form-container">
+      <span class="close" onclick="closeLoginForm()">&times;</span>
+      <h2>Sign In</h2>
+      <form id="loginForm" onsubmit="return handleLoginForm()">
+          <input type="text" placeholder="Enter Username" name="username" required />
+          <input type="password" placeholder="Enter Password" name="password" required />
+          <label><input type="checkbox" name="remember" /> Remember me</label>
+          <button type="submit">Login</button>
+          <a href="#">Forgot password?</a>
+      </form>
+  </div>
+</div>
+<main>
+    <div class="container1">
+      <div class="container1-content">
+        <h2>Welcome to WebGames!</h2>
+        <p>Discover a world of exciting online games at WebGames. Whether you're a fan of classic arcade games, strategy
+          challenges, or multiplayer adventures, we have something for everyone. Join millions of players worldwide and
+          start your gaming journey today!</p>
+        <div class="cta-buttons">
+          <button onclick="location.href='/register'">Sign Up / Create Account</button>
+        </div>
+      </div>
+    </div>
+    <div class="container2">
+      <img src="/static/logo.jpg" alt="WebGames Logo">
+      <h2>Featured Games</h2>
+      <div class="featured-games">
+        <div class="featured-game">
+          <img src="/static/mario.jpg" alt="Super Mario" />
+          <h3>Super Mario</h3>
+          <p>Super Mario is a classic platformer game developed by Nintendo. Join Mario on his adventures to rescue
+            Princess Peach from the evil Bowser!</p>
+        </div>
+        <div class="featured-game">
+          <img src="/static/pacman.jpg" alt="PackMan" />
+          <h3>PacMan</h3>
+          <p>PackMan is a popular arcade game where the player controls a yellow character called PackMan, navigating
+            through a maze while consuming dots and avoiding ghosts.</p>
+        </div>
+        <div class="featured-game">
+          <img src="/static/2048.jpg" alt="2048" />
+          <h3>2048</h3>
+          <p>2048 is a puzzle game where you slide numbered tiles on a grid to combine them and create a tile with the
+            number 2048. It requires strategic thinking and planning.</p>
+        </div>
+        <div class="featured-game">
+          <img src="/static/donkeykong.webp" alt="donkeykong" />
+          <h3>Donkeykong</h3>
+          <p>Help Mario rescue Princess Peach from the clutches of the evil Donkey Kong!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container3">
+      <div class="container3-content">
+        <img src="/static/logo.jpg" alt="WebGames Logo">
+        <h2>Account Features</h2>
+        <div class="account-features">
+          <p>WebGames' account features offer personalized gaming experiences, progress tracking, multiplayer capabilities, and exclusive rewards, enhancing your gaming journey.</p>
+          <button class="feedback-button">Give Us Feedback</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    function openLoginForm() {
+        document.getElementById("loginForm").style.display = "block";
+        document.body.classList.add("login-form-open");
+    }
+
+    function closeLoginForm() {
+        document.getElementById("loginForm").style.display = "none";
+        document.body.classList.remove("login-form-open");
+    }
+
+    function handleLoginForm() {
+        // Add login validation logic here
+        // If login is successful, redirect to index.html
+        window.location.href = "/home";
+        return false; // Prevent form submission
+    }
+</script>
+</body>
+
+</html>

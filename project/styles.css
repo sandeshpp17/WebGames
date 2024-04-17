@@ -1,0 +1,25 @@
+.container {
+    max-width: 300px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.links {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.links a {
+    text-decoration: none;
+    color: blue;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}

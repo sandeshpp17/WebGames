@@ -1,0 +1,70 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333; /* Dark semi-transparent background */
+    color: white;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+.social-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.google {
+    background-color: #DB4437; /* Google red */
+}
+
+.facebook {
+    background-color: #1877F2; /* Facebook blue */
+}
+
+.or {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.forgot-password {
+    color: #2196F3; /* Blue link color */
+    text-decoration: none;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.join-now {
+    text-align: center;
+    margin-top: 20px;
+}

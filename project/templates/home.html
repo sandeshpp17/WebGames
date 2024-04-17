@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGames - Home</title>
+    <style>
+        /* CSS for Navigation Bar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive; /* Set font family for all elements */
+        }
+        
+        body {
+            overflow-x: hidden; /* Hide horizontal scrollbar */
+            background-color: #222; /* Set background color to match dark theme */
+            color: #fff; /* Set text color */
+        }
+        
+        nav {
+            display: flex;
+            height: 15vh;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 0 20px;
+            margin-bottom: 20px; /* Add space between nav bar and container */
+        }
+        
+        nav .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        nav .logo img {
+            width: 50px; /* Increased logo size */
+            height: 50px;
+        }
+        
+        nav .logo h1 {
+            margin-left: 10px;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+        
+        nav ul li {
+            margin-right: auto; /* Divide items equally */
+        }
+        
+        nav ul li:last-child {
+            margin-right: 0;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px; /* Add padding to links */
+            font-size: 18px; /* Increase font size */
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.1); /* Add hover effect */
+        }
+        
+        /* CSS for Animation in Box */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 50vh; /* Increased height of the container */
+            margin-bottom: 20px; /* Add space between nav bar and container */
+        }
+        
+        .box {
+            width: 25vw; /* Four equal-size boxes */
+            height: 50vh;
+            background-size: cover;
+            background-position: center;
+            animation: animateBox 5s ease-in-out infinite; /* Animation in the box */
+        }
+        
+        /* Set background images for each box */
+        .box:nth-child(1) {
+            background-image: url('/static/mario.jpg');
+        }
+        
+        .box:nth-child(2) {
+            background-image: url('/static/pacman.jpg');
+        }
+        
+        .box:nth-child(3) {
+            background-image: url('/static/2048.jpg');
+        }
+        
+        .box:nth-child(4) {
+            background-image: url('/static/donkeykong.webp');
+        }
+        
+        @keyframes animateBox {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        
+        /* CSS for Game Containers */
+        .game-container {
+            width: 100%;
+            height: 400px;
+            background-color: #333; /* Set background color to match dark theme */
+            position: relative;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .game-container:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .game-image {
+            width: 40%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .game-content {
+            width: 50%;
+        }
+        
+        .game-content h2,
+        .game-content p {
+            font-family: 'Press Start 2P', cursive; /* Set font family for game content */
+            color: #fff; /* Set text color */
+        }
+        
+        /* Style anchor tag */
+        .game-link {
+            text-decoration: none;
+            color: inherit; /* Inherit text color */
+        }
+
+        /* CSS for Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Import Press Start 2P font -->
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <img src="/static/logo.jpg" alt="Web Games Icon">
+            <h1>WebGames</h1>
+        </div>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">WebGames</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Animation in Box Container -->
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+
+    <!-- Game Containers -->
+    <a href="http://172.16.22.103:8001" class="game-link">
+        <div class="game-container">
+            <div class="game-image" style="background-image: url('/static/mario.jpg');"></div>
+            <div class="game-content">
+                <h2>Mario</h2>
+                <p>Join Mario in his adventures to save Princess Peach from Bowser!</p>
+            </div>
+        </div>
+    </a>
+
+    <a href="http://172.16.22.103:8002" class="game-link">
+        <div class="game-container">
+            <div class="game-content">
+                <h2>Pac-Man</h2>
+                <p>Guide Pac-Man through the maze while avoiding ghosts!</p>
+            </div>
+            <div class="game-image" style="background-image: url('/static/pacman.jpg');"></div>
+        </div>
+    </a>
+
+    <a href="http://172.16.22.103:8003" class="game-link">
+        <div class="game-container">
+            <div class="game-image" style="background-image: url('/static/2048.jpg');"></div>
+            <div class="game-content">
+                <h2>2048</h2>
+                <p>Combine tiles to reach the 2048 tile in this addictive puzzle game!</p>
+            </div>
+        </div>
+    </a>
+
+    <a href="http://172.16.22.103:8004" class="game-link">
+        <div class="game-container">
+            <div class="game-content">
+                <h2>Donkey Kong</h2>
+                <p>Help Mario rescue Princess Peach from the clutches of the evil Donkey Kong!</p>
+            </div>
+            <div class="game-image" style="background-image: url('/static/donkeykong.webp');"></div>
+        </div>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2024 Web Games. All rights reserved.
+    </footer>
+
+</body>
+</html>
+

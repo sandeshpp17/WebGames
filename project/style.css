@@ -1,0 +1,45 @@
+  /* Basic styling for the page */
+  body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+  }
+
+  .box-container {
+    display: flex;
+    overflow-x: auto;
+    padding: 20px;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    margin-bottom: 20px;
+  }
+  
+  .box {
+    width: calc(33.333% - 20px);
+    margin-right: 20px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .box:last-child {
+    margin-right: 10px;
+  }
+  
+  .scroll-left {
+    display: inline-block;
+    padding: 10px;
+    margin: auto;
+  }
+
+  .scroll-right {
+    display: inline-block;
+    padding: 10px;
+    margin: auto;
+  }
+  .scroll-left:hover,
+  .scroll-right:hover {
+    background-color: #e6e6e6;
+  }

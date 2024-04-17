@@ -1,0 +1,13 @@
+db.createUser({user: "admin",pwd: "adminpassword" ,roles: [{ role: "root", db: "admin" }]})
+
+ docker run -d -p 27017:27017 --name mongodb-container -e MONGO_INITDB_ROOT_USERNAME=adminUser -e MONGO_INITDB_ROOT_PASSWORD=adminPassword mongodb
+
+
+{
+  "_id": ObjectId("6149dc8a93a27906d8d8e781"),
+  "username": "web_admin",
+  "email": "web@example.com",
+  "password": "$2b$12$GqPZJtATsN1T5GMDaILs8egTsRr4vqV5y6fOjg2GQyF.4A2M2s0ZC",
+  "createdAt": ISODate("2022-09-21T08:00:00Z"),
+  "updatedAt": ISODate("2022-09-21T08:15:00Z")
+}
