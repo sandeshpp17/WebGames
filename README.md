@@ -1,17 +1,21 @@
-### WebGame Project
+### WebGame Project with Docker Integration
 
 #### Overview
-The WebGame project is a web-based platform that provides users with the ability to register, log in, and access a variety of online games. The project uses Flask as the web framework and MongoDB for data storage. The user interface is designed with HTML, CSS, and JavaScript to create an engaging and user-friendly experience.
+The WebGame project is a web-based platform that allows users to register, log in, and access a variety of online games. The project uses Flask for the backend, MongoDB for data storage, and includes a Docker setup to simplify deployment and ensure consistent environments across development and production.
 
 #### Features
-1. **User Registration**: Allows new users to register by providing a username, email, and password.
+1. **User Registration**: Allows new users to sign up by providing a username, email, and password.
 2. **User Login**: Enables registered users to log in using their username and password.
-3. **Game Dashboard**: Once logged in, users can access a dashboard with featured games.
+3. **Game Dashboard**: Provides access to a variety of online games after logging in.
 4. **Password Visibility Toggle**: Users can toggle the visibility of passwords during registration and login.
-5. **Responsive Design**: The website layout is designed to be responsive, ensuring usability across various devices.
+5. **Responsive Design**: Ensures usability across different devices.
+6. **Docker Integration**: Utilizes Docker to create a containerized environment for easy deployment and consistency.
 
 #### File Structure
 - **app.py**: The main Flask application file containing routes and database interactions.
+- **Dockerfile**: Defines the Docker image for the Flask application.
+- **docker-compose.yml**: Configures the Docker services for the application and MongoDB.
+- **requirements.txt**: Lists the dependencies for the Flask application.
 - **templates/**: Directory containing HTML templates for different pages.
   - `login.html`: Template for the login page.
   - `register.html`: Template for the registration page.
@@ -26,34 +30,64 @@ The WebGame project is a web-based platform that provides users with the ability
 - **style.css**: CSS file for styling the web pages.
 
 #### Installation and Setup
+
+##### Prerequisites
+- Docker and Docker Compose installed on your machine.
+
+##### Steps
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/sandeshpp17/WebGames.git
+   git clone https://github.com/sandeshpp17/WebGames
    cd webgame
    ```
 
-2. **Create a Virtual Environment**:
+2. **Build and Run with Docker Compose**:
    ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+   docker-compose up --build
    ```
+   This command builds the Docker image and starts the Flask application along with MongoDB in separate containers.
 
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Run the Application**:
-   ```bash
-   python app.py
-   ```
+3. **Access the Application**:
    The application will be accessible at `http://127.0.0.1:5000/`.
 
-#### MongoDB Setup
-Ensure MongoDB is installed and running. The connection string in `app.py` should be updated to match your MongoDB server settings:
-```python
-client = MongoClient('mongodb://your_mongo_host:your_mongo_port/webgamelogin')
-```
+#### Docker Configuration
+
+- **Dockerfile**:
+  ```dockerfile
+  FROM python:3.9-slim
+
+  WORKDIR /app
+
+  COPY requirements.txt requirements.txt
+  RUN pip install -r requirements.txt
+
+  COPY . .
+
+  CMD ["python", "app.py"]
+  ```
+
+- **docker-compose.yml**:
+  ```yaml
+  version: '3.8'
+
+  services:
+    web:
+      build: .
+      ports:
+        - "5000:5000"
+      depends_on:
+        - mongo
+
+    mongo:
+      image: mongo
+      ports:
+        - "27017:27017"
+  ```
+
+#### Usage
+- **Register**: Navigate to `/register`, fill in the registration form, and submit.
+- **Login**: Navigate to `/`, enter your credentials, and log in.
+- **Dashboard**: After logging in, you will be redirected to `/index` where you can view and play featured games.
 
 #### Routes and Endpoints
 - **GET /**: Renders the login page.
@@ -63,11 +97,6 @@ client = MongoClient('mongodb://your_mongo_host:your_mongo_port/webgamelogin')
 - **GET /index**: Renders the game dashboard after successful login.
 - **GET /images/<filename>**: Serves static image files.
 
-#### Usage
-- **Register**: Navigate to `/register`, fill in the registration form, and submit.
-- **Login**: Navigate to `/`, enter your credentials, and log in.
-- **Dashboard**: After logging in, you will be redirected to `/index` where you can view and play featured games.
-
 #### Contributing
 1. Fork the repository.
 2. Create a new branch: `git checkout -b feature-name`.
@@ -75,7 +104,6 @@ client = MongoClient('mongodb://your_mongo_host:your_mongo_port/webgamelogin')
 4. Push to the branch: `git push origin feature-name`.
 5. Open a pull request.
 
-
 ---
 
-This summary provides an overview of the WebGame project, detailing its features, file structure, setup instructions, and usage. It is intended to help users and contributors understand the project and get started quickly.
+This summary provides an overview of the WebGame project, detailing its features, file structure, setup instructions, and usage with Docker integration. It is intended to help users and contributors understand the project and get started quickly.
