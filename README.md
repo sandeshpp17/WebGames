@@ -28,7 +28,7 @@ The WebGame project is a web-based platform that provides users with the ability
 #### Installation and Setup
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/webgame.git
+   git clone https://github.com/sandeshpp17/WebGames.git
    cd webgame
    ```
 
